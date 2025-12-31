@@ -1,8 +1,7 @@
 <script setup>
-import * as echarts from "echarts";
-import Card from "./Card.vue";
 import { onMounted } from "vue";
-
+import Card from "./Card.vue";
+import * as echarts from "echarts";
 const data = [
   { name: "A类", value: 40, color: "#00ffff" },
   { name: "B类", value: 30, color: "#3ba1ff" },
@@ -13,16 +12,12 @@ const data = [
   { name: "G类", value: 25, color: "#7254de" },
 ];
 
-const option1 = {
+const option2 = {
   series: [
     {
       type: "pie",
-      radius: ["65%", "80%"],
+      radius: ["60%", "98%"], // 增大内外半径比例
       center: ["50%", "50%"],
-      padAngle: 5,
-      itemStyle: {
-        borderRadius: 4,
-      },
       data: data.map((d) => ({
         value: d.value,
         name: d.name,
@@ -34,26 +29,6 @@ const option1 = {
   ],
   graphic: [
     {
-      type: "circle",
-      left: "center",
-      top: "center",
-      shape: { r: 60 },
-      style: {
-        fill: {
-          type: "radial",
-          x: 0.5,
-          y: 0.5,
-          r: 0.5,
-          colorStops: [
-            { offset: 0, color: "rgba(0,255,255,0.05)" },
-            { offset: 0.8, color: "rgba(0,255,255,0.3)" },
-            { offset: 1, color: "rgba(0,255,255,0.8)" },
-          ],
-        },
-      },
-      silent: true,
-    },
-    {
       type: "group",
       left: "center",
       top: "center",
@@ -64,7 +39,7 @@ const option1 = {
           left: -10,
           top: -15,
           style: {
-            text: "75",
+            text: "13",
             fill: "#00ffff",
             fontSize: 32,
             fontFamily: "Digital",
@@ -76,7 +51,7 @@ const option1 = {
           top: 0,
           left: 30,
           style: {
-            text: "架次",
+            text: "条",
             fill: "#8fdfff",
             fontSize: 12,
             textAlign: "center",
@@ -87,7 +62,7 @@ const option1 = {
           top: 25,
           left: -15,
           style: {
-            text: "目前正在执行",
+            text: "当日申请",
             fill: "#8fdfff",
             fontSize: 12,
             textAlign: "center",
@@ -97,16 +72,33 @@ const option1 = {
     },
   ],
 };
-
 onMounted(() => {
-  const charts1 = echarts.init(document.getElementById("demoId1"));
-  charts1.setOption(option1);
+  const charts2 = echarts.init(document.getElementById("demoId2"));
+  charts2.setOption(option2);
 });
 </script>
 <template>
-  <Card class="w-50 mr-8" title="今日飞行动态">
+  <Card class="w-50" title="今日申请计划">
     <div style="height: 100%; display: flex">
-      <div id="demoId1" style="flex: 1; height: 100%"></div>
+      <div class="num-box">
+        <div class="num-item">
+          <div class="num">45</div>
+          <div class="text">申请总数(条)</div>
+        </div>
+        <div class="num-item">
+          <div class="num">45</div>
+          <div class="text">临时空域(条)</div>
+        </div>
+        <div class="num-item">
+          <div class="num">45</div>
+          <div class="text">长期计划(条)</div>
+        </div>
+        <div class="num-item">
+          <div class="num">45</div>
+          <div class="text">次日计划(条)</div>
+        </div>
+      </div>
+      <div id="demoId2" style="flex: 1; height: 100%"></div>
       <div class="legend-box">
         <div class="legend-item" v-for="item in data">
           <div
@@ -115,43 +107,39 @@ onMounted(() => {
           ></div>
           <div class="legend-title">{{ item.name }}</div>
           <div class="legend-percent">{{ item.value }}%</div>
-          <div class="legend-value">{{ item.value }}</div>
         </div>
       </div>
     </div>
   </Card>
 </template>
 <style scoped>
-.legend-box {
-  flex: 1;
-  padding-top: 40px;
-  padding-left: 30px;
-}
-.legend-item {
+.num-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 18px;
+  padding: 11px;
+  justify-content: space-between;
 }
-.item-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-right: 8.5px;
+.num-item {
+  background-image: url("../../public/legend-img.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 101px;
+  height: 53px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+  box-sizing: border-box;
 }
-.legend-title {
-  font-size: 12px;
+.num-item .num {
+  font-family: "Digital";
+  font-size: 24px;
+  color: #00ffff;
+}
+.num-item .text {
+  font-size: 10px;
   color: #fff;
-  margin-right: 45px;
-}
-.legend-percent {
-  font-size: 12px;
-  color: #fff;
-  margin-right: 24px;
-  width: 20px;
-}
-.legend-value {
-  font-size: 12px;
-  color: #fff;
-  text-align: right;
 }
 </style>
