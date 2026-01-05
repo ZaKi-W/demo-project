@@ -15,6 +15,9 @@ import MeteorologicalDataPanel from "./MeteorologicalDataPanel.vue";
 import WarningInfo from "./WarningInfo.vue";
 import WeatherTimeBar from "./WeatherTimeBar.vue";
 
+const adddd = 111;
+const brrrrr = 333;
+
 onMounted(() => {
   const screen = document.getElementById("screen");
   const scaleX = window.innerWidth / 3440;
