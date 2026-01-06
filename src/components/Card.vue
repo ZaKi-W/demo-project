@@ -3,7 +3,6 @@ const props = defineProps({
   class: String,
   title: String,
 });
-console.log(props, "=====");
 </script>
 <template>
   <div :class="`card ${props.class}`">

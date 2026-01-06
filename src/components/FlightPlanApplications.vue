@@ -3,20 +3,20 @@ import { onMounted } from "vue";
 import Card from "./Card.vue";
 import * as echarts from "echarts";
 const data = [
-  { name: "A类", value: 40, color: "#00ffff" },
-  { name: "B类", value: 30, color: "#3ba1ff" },
-  { name: "C类", value: 20, color: "#36cfc9" },
-  { name: "D类", value: 10, color: "#9254de" },
-  { name: "E类", value: 13, color: "#2234de" },
-  { name: "F类", value: 50, color: "#4254de" },
-  { name: "G类", value: 25, color: "#7254de" },
+  { name: "图例1", value: 40, color: "#00ffff" },
+  { name: "图例2", value: 30, color: "#3ba1ff" },
+  { name: "图例3", value: 20, color: "#36cfc9" },
+  { name: "图例4", value: 10, color: "#9254de" },
+  { name: "图例5", value: 13, color: "#2234de" },
+  { name: "图例6", value: 50, color: "#4254de" },
+  { name: "图例7", value: 25, color: "#7254de" },
 ];
 
 const option2 = {
   series: [
     {
       type: "pie",
-      radius: ["60%", "98%"], // 增大内外半径比例
+      radius: ["60%", "90%"], // 增大内外半径比例
       center: ["50%", "50%"],
       data: data.map((d) => ({
         value: d.value,
@@ -49,7 +49,7 @@ const option2 = {
         {
           type: "text",
           top: 0,
-          left: 30,
+          left: 20,
           style: {
             text: "条",
             fill: "#8fdfff",
@@ -141,5 +141,37 @@ onMounted(() => {
 .num-item .text {
   font-size: 10px;
   color: #fff;
+}
+.legend-box {
+  flex: 1;
+  padding-top: 40px;
+  padding-left: 30px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 8.5px;
+}
+.legend-title {
+  font-size: 12px;
+  color: #fff;
+  margin-right: 45px;
+}
+.legend-percent {
+  font-size: 12px;
+  color: #fff;
+  margin-right: 24px;
+  width: 20px;
+}
+.legend-value {
+  font-size: 12px;
+  color: #fff;
+  text-align: right;
 }
 </style>
